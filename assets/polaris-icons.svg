@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 320" role="img" aria-labelledby="title desc">
+  <title id="title">Polaris service icons</title>
+  <desc id="desc">Four line icons for websites, calling, chat, and WhatsApp systems.</desc>
+  <rect width="1200" height="320" rx="28" fill="#F5F7F4"/>
+  <g fill="none" stroke="#0B0D12" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="70" y="55" width="170" height="135" rx="12"/>
+    <path d="M70 88h170M105 120h100M105 150h64"/>
+    <circle cx="285" cy="190" r="25" fill="#D6FF4B" stroke="#0B0D12"/>
+    <path d="M278 181v19l15-8"/>
+    <rect x="350" y="55" width="170" height="135" rx="12"/>
+    <path d="M385 105c0-19 16-34 35-34s35 15 35 34v23c0 19-16 34-35 34h-19l-19 15v-72Z"/>
+    <path d="M421 103v38M402 122h38"/>
+    <circle cx="565" cy="190" r="25" fill="#D6FF4B" stroke="#0B0D12"/>
+    <path d="M555 190h20"/>
+    <path d="M675 70h145a15 15 0 0 1 15 15v85a15 15 0 0 1-15 15h-91l-32 28 9-28h-31a15 15 0 0 1-15-15V85a15 15 0 0 1 15-15Z"/>
+    <path d="M690 112h110M690 143h78"/>
+    <circle cx="855" cy="190" r="25" fill="#D6FF4B" stroke="#0B0D12"/>
+    <path d="M845 190h20"/>
+    <path d="M1000 68h100a22 22 0 0 1 22 22v82a22 22 0 0 1-22 22h-57l-28 24 8-24h-23a22 22 0 0 1-22-22V90a22 22 0 0 1 22-22Z"/>
+    <path d="M1027 120c8 24 25 41 49 49l13-13-18-13-10 8c-11-6-17-12-23-23l8-10-13-18-13 11c-2 3-2 6-1 9Z"/>
+  </g>
+  <g fill="#0B0D12" font-family="SFMono-Regular, Menlo, Consolas, monospace" font-size="18" letter-spacing="2">
+    <text x="70" y="260">WEBSITES</text>
+    <text x="350" y="260">CALLING</text>
+    <text x="675" y="260">CHAT</text>
+    <text x="980" y="260">WHATSAPP</text>
+  </g>
+</svg>
