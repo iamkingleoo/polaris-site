@@ -3,329 +3,255 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#08090c" />
-  <meta name="description" content="Polaris builds the quiet systems behind a business that is easier to find, easier to choose, and easier to run." />
-  <title>Polaris — Make more room for the work that matters</title>
+  <meta name="theme-color" content="#0B0D12" />
+  <meta name="description" content="Polaris helps local businesses get found, answer customers, follow up, and make more room for the work that matters." />
+  <title>Polaris — Make the business easier to run</title>
   <style>
     :root {
-      --ink: #08090c;
-      --ink-soft: #101217;
-      --ink-lift: #17191f;
-      --paper: #f3efe7;
-      --paper-dim: #b7b2a8;
-      --paper-faint: #77766f;
-      --brass: #d3bd79;
-      --brass-soft: #96875e;
-      --line: rgba(243, 239, 231, .15);
-      --line-strong: rgba(243, 239, 231, .28);
-      --serif: Georgia, 'Times New Roman', serif;
+      --ink: #0B0D12;
+      --surface: #10141A;
+      --paper: #F5F7F4;
+      --slate: #66707A;
+      --slate-light: #A8B0B6;
+      --signal: #D6FF4B;
+      --line: rgba(245, 247, 244, .14);
+      --line-strong: rgba(245, 247, 244, .28);
       --sans: Arial, Helvetica, sans-serif;
       --mono: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
-      --mx: 50%;
-      --my: 15%;
     }
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; background: var(--ink); }
     body {
       margin: 0;
-      background: var(--ink);
       color: var(--paper);
+      background: var(--ink);
       font-family: var(--sans);
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 10;
-      opacity: .035;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.4'/%3E%3C/svg%3E");
-    }
+    ::selection { color: var(--ink); background: var(--signal); }
     a { color: inherit; text-decoration: none; }
     button { color: inherit; font: inherit; }
-    ::selection { color: var(--ink); background: var(--brass); }
+    img { max-width: 100%; }
 
     .progress {
       position: fixed;
       inset: 0 0 auto;
+      z-index: 20;
       height: 2px;
-      background: var(--brass);
-      transform-origin: left;
+      background: var(--signal);
       transform: scaleX(0);
-      z-index: 30;
+      transform-origin: left;
     }
-    .shell { width: min(1320px, calc(100% - 72px)); margin: 0 auto; }
+    .shell { width: min(1180px, calc(100% - 64px)); margin: 0 auto; }
     .eyebrow {
       display: flex;
       align-items: center;
-      gap: 12px;
-      color: var(--paper-dim);
+      gap: 10px;
+      color: var(--slate-light);
       font: 10px/1 var(--mono);
-      letter-spacing: .18em;
+      letter-spacing: .16em;
       text-transform: uppercase;
     }
-    .eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--brass); }
-    .muted { color: var(--paper-dim); }
-    .brass { color: var(--brass); }
+    .eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--signal); }
+    .signal { color: var(--signal); }
 
     .site-header {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 20;
-      padding: 26px 0;
+      inset: 0 0 auto;
+      z-index: 10;
+      padding: 25px 0;
     }
     .header-inner { display: flex; align-items: center; justify-content: space-between; }
-    .brand { display: inline-flex; align-items: center; gap: 12px; }
-    .brand img { width: 30px; height: 30px; display: block; }
-    .brand-name { font-size: 15px; letter-spacing: .26em; font-weight: 700; }
-    .main-nav { display: flex; gap: 34px; align-items: center; }
-    .main-nav a {
-      color: var(--paper-dim);
-      font: 11px/1 var(--mono);
-      letter-spacing: .11em;
+    .brand { display: inline-flex; align-items: center; gap: 11px; }
+    .brand img { display: block; width: 27px; height: 27px; }
+    .brand-name { font-size: 14px; font-weight: 700; letter-spacing: .22em; }
+    .main-nav { display: flex; align-items: center; gap: 30px; }
+    .main-nav a, .header-link {
+      color: var(--slate-light);
+      font: 10px/1 var(--mono);
+      letter-spacing: .1em;
       text-transform: uppercase;
       transition: color 180ms ease;
     }
-    .main-nav a:hover, .main-nav a:focus-visible { color: var(--paper); }
-    .header-cta, .button {
+    .main-nav a:hover, .main-nav a:focus-visible, .header-link:hover, .header-link:focus-visible { color: var(--paper); }
+    .header-link { display: inline-flex; align-items: center; gap: 8px; color: var(--paper); }
+    .arrow { font-size: 15px; line-height: 0; }
+    .menu-toggle { display: none; padding: 8px 0 8px 8px; border: 0; background: transparent; cursor: pointer; }
+    .menu-toggle span, .menu-toggle::before, .menu-toggle::after { display: block; width: 20px; height: 1px; margin: 5px 0; background: var(--paper); content: ''; transition: transform 180ms ease; }
+
+    .hero {
+      position: relative;
+      min-height: 780px;
+      padding: 180px 0 92px;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+    }
+    .hero::after {
+      position: absolute;
+      top: 0;
+      right: 11%;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(transparent, rgba(214,255,75,.22), transparent);
+      content: '';
+      opacity: .6;
+    }
+    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr); gap: 100px; align-items: end; }
+    .hero-copy { max-width: 720px; }
+    .hero h1 {
+      max-width: 720px;
+      margin: 30px 0 27px;
+      font-size: clamp(54px, 7vw, 94px);
+      line-height: .93;
+      letter-spacing: -.075em;
+      font-weight: 700;
+    }
+    .hero h1 .underline { position: relative; white-space: nowrap; }
+    .hero h1 .underline::after { position: absolute; right: 0; bottom: -.08em; left: 0; height: 4px; background: var(--signal); content: ''; transform: scaleX(.45); transform-origin: left; opacity: .9; }
+    .hero-lede { max-width: 510px; margin: 0; color: var(--slate-light); font-size: 17px; line-height: 1.6; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+    .button {
       display: inline-flex;
+      min-height: 46px;
       align-items: center;
       justify-content: center;
-      gap: 18px;
-      min-height: 48px;
-      padding: 0 18px;
+      gap: 17px;
+      padding: 0 17px;
       border: 1px solid var(--line-strong);
       background: transparent;
       color: var(--paper);
       font: 10px/1 var(--mono);
-      letter-spacing: .13em;
+      letter-spacing: .1em;
       text-transform: uppercase;
-      transition: background 200ms ease, color 200ms ease, border-color 200ms ease, transform 200ms ease;
+      transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, color 180ms ease;
     }
-    .button:hover, .button:focus-visible, .header-cta:hover, .header-cta:focus-visible {
-      background: var(--paper);
-      color: var(--ink);
-      border-color: var(--paper);
-      transform: translateY(-2px);
+    .button:hover, .button:focus-visible { border-color: var(--paper); background: var(--paper); color: var(--ink); transform: translateY(-2px); }
+    .button--solid { border-color: var(--signal); background: var(--signal); color: var(--ink); }
+    .button--solid:hover, .button--solid:focus-visible { border-color: var(--paper); background: var(--paper); }
+    .hero-note { margin: 30px 0 0; color: var(--slate); font: 10px/1.5 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+
+    .hero-side { padding-bottom: 4px; }
+    .side-intro { max-width: 250px; margin: 0 0 28px; color: var(--slate-light); font-size: 14px; line-height: 1.55; }
+    .side-list { border-top: 1px solid var(--line); }
+    .side-item { display: grid; grid-template-columns: 32px 1fr; gap: 14px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+    .side-item span { color: var(--signal); font: 10px/1.3 var(--mono); }
+    .side-item p { margin: 0; font-size: 14px; line-height: 1.3; }
+
+    .section { padding: 112px 0; border-bottom: 1px solid var(--line); }
+    .section-heading { display: grid; grid-template-columns: .34fr .66fr; gap: 54px; margin-bottom: 64px; }
+    .section-heading h2, .split-heading h2 {
+      max-width: 730px;
+      margin: 0;
+      font-size: clamp(40px, 5vw, 66px);
+      line-height: .98;
+      letter-spacing: -.07em;
     }
-    .button--solid { background: var(--brass); border-color: var(--brass); color: var(--ink); }
-    .button--solid:hover, .button--solid:focus-visible { background: var(--paper); border-color: var(--paper); }
-    .arrow { font-size: 16px; line-height: 0; }
-    .menu-toggle { display: none; border: 0; background: none; padding: 10px 0 10px 10px; }
+    .section-heading p { max-width: 430px; margin: 24px 0 0; color: var(--slate-light); font-size: 16px; line-height: 1.6; }
 
-    .hero {
-      position: relative;
-      min-height: 840px;
-      padding: 190px 0 80px;
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at var(--mx) var(--my), rgba(211, 189, 121, .12), transparent 25%),
-        linear-gradient(135deg, #08090c 0%, #0b0d11 58%, #0f1013 100%);
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: linear-gradient(90deg, transparent 0, rgba(255,255,255,.035) 50%, transparent 100%);
-      opacity: .22;
-    }
-    .hero-grid { position: relative; z-index: 1; display: grid; grid-template-columns: minmax(0, 1.03fr) minmax(420px, .97fr); gap: 90px; align-items: center; }
-    .hero-copy { max-width: 720px; }
-    .hero h1 {
-      max-width: 700px;
-      margin: 30px 0 28px;
-      font-size: 80px;
-      line-height: .95;
-      letter-spacing: -.075em;
-      font-weight: 700;
-    }
-    .hero h1 em { color: var(--brass); font-family: var(--serif); font-weight: 400; letter-spacing: -.06em; }
-    .hero-lede { max-width: 520px; margin: 0; color: var(--paper-dim); font-size: 18px; line-height: 1.55; }
-    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 38px; }
-    .hero-note { margin: 32px 0 0; color: var(--paper-faint); font: 10px/1.5 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
+    .outcome-list { border-top: 1px solid var(--line); }
+    .outcome { display: grid; grid-template-columns: 60px minmax(220px, .8fr) 1fr; gap: 26px; align-items: start; padding: 25px 0; border-bottom: 1px solid var(--line); transition: padding 200ms ease, background 200ms ease; }
+    .outcome:hover { padding-right: 14px; padding-left: 14px; background: rgba(214,255,75,.035); }
+    .outcome-no { padding-top: 3px; color: var(--signal); font: 10px/1 var(--mono); }
+    .outcome h3 { margin: 0; font-size: 22px; font-weight: 400; letter-spacing: -.035em; }
+    .outcome p { max-width: 360px; margin: 0; color: var(--slate-light); font-size: 14px; line-height: 1.55; }
 
-    .pulse {
-      position: relative;
-      min-height: 490px;
-      padding: 25px;
-      border: 1px solid var(--line);
-      background: rgba(23, 25, 31, .68);
-      box-shadow: 0 30px 100px rgba(0,0,0,.26);
-      overflow: hidden;
-    }
-    .pulse::before, .pulse::after { content: ''; position: absolute; border-radius: 50%; border: 1px solid rgba(211,189,121,.18); pointer-events: none; }
-    .pulse::before { width: 410px; height: 410px; top: 42px; right: -125px; }
-    .pulse::after { width: 260px; height: 260px; top: 118px; right: -50px; }
-    .pulse-head { position: relative; z-index: 1; display: flex; justify-content: space-between; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
-    .pulse-title { font: 10px/1 var(--mono); letter-spacing: .14em; text-transform: uppercase; color: var(--paper-dim); }
-    .pulse-time { font: 10px/1 var(--mono); color: var(--brass); letter-spacing: .08em; }
-    .pulse-center { position: relative; z-index: 1; display: grid; place-items: center; height: 210px; }
-    .pulse-orbit { width: 160px; height: 160px; position: relative; border: 1px solid rgba(243,239,231,.18); border-radius: 50%; }
-    .pulse-orbit::before, .pulse-orbit::after { content: ''; position: absolute; inset: 25px; border: 1px solid rgba(211,189,121,.45); border-radius: 50%; }
-    .pulse-orbit::after { inset: 57px; background: var(--brass); box-shadow: 0 0 0 8px rgba(211,189,121,.08), 0 0 36px rgba(211,189,121,.22); }
-    .pulse-mark { position: absolute; inset: 0; display: grid; place-items: center; z-index: 2; }
-    .pulse-mark img { width: 22px; height: 22px; filter: brightness(0); }
-    .orbit-dot { position: absolute; width: 6px; height: 6px; border-radius: 50%; background: var(--paper); top: 8px; left: 78px; box-shadow: 0 0 15px rgba(243,239,231,.5); }
-    .pulse-label { position: absolute; color: var(--paper-faint); font: 9px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; }
-    .pulse-label--top { top: 8px; left: 42%; transform: translateX(-50%); }
-    .pulse-label--right { right: -34px; top: 49%; }
-    .pulse-label--bottom { bottom: 6px; left: 34%; }
-    .pulse-rows { position: relative; z-index: 1; display: grid; gap: 8px; }
-    .pulse-row { display: flex; align-items: center; justify-content: space-between; padding: 13px 0; border-top: 1px solid var(--line); color: var(--paper-dim); font-size: 12px; transition: color 300ms ease, padding 300ms ease; }
-    .pulse-row.is-active { color: var(--paper); padding-left: 8px; }
-    .pulse-row span:first-child { display: inline-flex; align-items: center; gap: 9px; }
-    .pulse-row span:first-child::before { content: ''; width: 5px; height: 5px; border-radius: 50%; border: 1px solid var(--brass); }
-    .pulse-row.is-active span:first-child::before { background: var(--brass); box-shadow: 0 0 10px rgba(211,189,121,.5); }
-    .pulse-row small { font: 9px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--brass-soft); }
+    .split { display: grid; grid-template-columns: .42fr .58fr; gap: 100px; align-items: start; }
+    .split-heading h2 { margin-top: 22px; }
+    .split-heading p { max-width: 340px; margin: 27px 0 0; color: var(--slate-light); font-size: 15px; line-height: 1.6; }
+    .steps { border-top: 1px solid var(--line); }
+    .step { display: grid; grid-template-columns: 42px 1fr; gap: 18px; padding: 23px 0; border-bottom: 1px solid var(--line); }
+    .step-number { color: var(--signal); font: 10px/1 var(--mono); }
+    .step h3 { margin: 0 0 8px; font-size: 18px; font-weight: 400; }
+    .step p { max-width: 400px; margin: 0; color: var(--slate-light); font-size: 14px; line-height: 1.55; }
 
-    .statement { padding: 130px 0 120px; background: var(--paper); color: var(--ink); }
-    .statement-grid { display: grid; grid-template-columns: .34fr 1fr; gap: 80px; }
-    .statement .eyebrow { color: #68665f; }
-    .statement .eyebrow::before { background: var(--brass-soft); }
-    .statement h2 { max-width: 980px; margin: 0; font-size: 70px; line-height: .96; letter-spacing: -.075em; font-weight: 700; }
-    .statement h2 em { font-family: var(--serif); font-weight: 400; }
-    .statement-bottom { display: flex; justify-content: space-between; align-items: end; gap: 60px; margin-top: 75px; padding-top: 26px; border-top: 1px solid rgba(8,9,12,.18); }
-    .statement-bottom p { max-width: 440px; margin: 0; color: #64625c; line-height: 1.55; font-size: 16px; }
-    .statement-annotation { color: #6d6a63; font: 10px/1.5 var(--mono); letter-spacing: .14em; text-transform: uppercase; }
-
-    .services { padding: 135px 0 120px; }
-    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 40px; margin-bottom: 70px; }
-    .section-head h2 { max-width: 720px; margin: 20px 0 0; font-size: 64px; line-height: .98; letter-spacing: -.07em; }
-    .section-head p { max-width: 260px; margin: 0; color: var(--paper-dim); line-height: 1.55; font-size: 15px; }
-    .service-list { border-top: 1px solid var(--line); }
-    .service-item { display: grid; grid-template-columns: .26fr .46fr .28fr; gap: 30px; align-items: center; min-height: 140px; padding: 28px 0; border-bottom: 1px solid var(--line); transition: padding 250ms ease, background 250ms ease; }
-    .service-item:hover { padding-left: 18px; padding-right: 18px; background: linear-gradient(90deg, rgba(211,189,121,.07), transparent); }
-    .service-index { color: var(--brass); font: 11px/1 var(--mono); letter-spacing: .13em; }
-    .service-title { font-size: 25px; letter-spacing: -.04em; }
-    .service-title em { color: var(--brass); font-family: var(--serif); font-weight: 400; }
-    .service-copy { max-width: 310px; margin-left: auto; color: var(--paper-dim); line-height: 1.45; font-size: 13px; }
-
-    .dark-band { padding: 120px 0; background: var(--ink-soft); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .dark-band-grid { display: grid; grid-template-columns: .42fr .58fr; gap: 100px; }
-    .dark-band h2 { margin: 24px 0 0; font-size: 59px; line-height: .97; letter-spacing: -.07em; }
-    .dark-band h2 em { font-family: var(--serif); color: var(--brass); font-weight: 400; }
-    .change-list { border-top: 1px solid var(--line); }
-    .change-item { display: grid; grid-template-columns: 38px 1fr; gap: 18px; padding: 24px 0; border-bottom: 1px solid var(--line); }
-    .change-no { color: var(--brass); font: 11px/1 var(--mono); }
-    .change-item h3 { margin: 0 0 8px; font-size: 18px; font-weight: 400; letter-spacing: -.02em; }
-    .change-item p { max-width: 400px; margin: 0; color: var(--paper-dim); font-size: 13px; line-height: 1.55; }
-
-    .process { padding: 130px 0; background: var(--paper); color: var(--ink); }
-    .process .eyebrow { color: #68665f; }
-    .process .eyebrow::before { background: var(--brass-soft); }
-    .process h2 { max-width: 760px; margin: 22px 0 75px; font-size: 66px; line-height: .96; letter-spacing: -.075em; }
-    .process h2 em { font-family: var(--serif); font-weight: 400; }
-    .process-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(8,9,12,.24); }
-    .process-step { min-height: 250px; padding: 25px 28px 25px 0; border-bottom: 1px solid rgba(8,9,12,.24); }
-    .process-step + .process-step { padding-left: 28px; border-left: 1px solid rgba(8,9,12,.24); }
-    .step-no { color: #8b7a4d; font: 10px/1 var(--mono); letter-spacing: .15em; }
-    .process-step h3 { margin: 48px 0 12px; font-size: 25px; letter-spacing: -.04em; }
-    .process-step p { max-width: 250px; margin: 0; color: #6a6861; line-height: 1.5; font-size: 14px; }
-
-    .pricing { padding: 130px 0; }
+    .pricing { padding: 112px 0; border-bottom: 1px solid var(--line); }
     .pricing-grid { display: grid; grid-template-columns: .42fr .58fr; gap: 100px; }
-    .pricing h2 { margin: 22px 0 0; font-size: 58px; line-height: .98; letter-spacing: -.07em; }
-    .pricing h2 em { font-family: var(--serif); color: var(--brass); font-weight: 400; }
-    .pricing-copy { max-width: 550px; color: var(--paper-dim); font-size: 18px; line-height: 1.55; }
-    .price-line { display: flex; align-items: start; justify-content: space-between; gap: 35px; padding: 25px 0; border-top: 1px solid var(--line); }
-    .price-line:last-child { border-bottom: 1px solid var(--line); }
-    .price-line strong { font-size: 17px; font-weight: 400; }
-    .price-line span { max-width: 265px; color: var(--paper-dim); font-size: 13px; line-height: 1.45; text-align: right; }
+    .pricing h2 { max-width: 430px; margin: 22px 0 0; font-size: clamp(40px, 5vw, 62px); line-height: .98; letter-spacing: -.07em; }
+    .pricing-intro { max-width: 480px; margin: 0 0 31px; color: var(--slate-light); font-size: 16px; line-height: 1.6; }
+    .price-lines { border-top: 1px solid var(--line); }
+    .price-line { display: flex; align-items: baseline; justify-content: space-between; gap: 25px; padding: 20px 0; border-bottom: 1px solid var(--line); }
+    .price-line strong { font-size: 16px; font-weight: 400; }
+    .price-line span { color: var(--slate-light); font: 10px/1.45 var(--mono); letter-spacing: .04em; text-align: right; }
 
-    .faq { padding: 115px 0 125px; background: var(--ink-soft); }
-    .faq-grid { display: grid; grid-template-columns: .32fr .68fr; gap: 100px; }
-    .faq h2 { margin: 22px 0 0; font-size: 58px; line-height: .98; letter-spacing: -.07em; }
+    .faq { padding: 112px 0; border-bottom: 1px solid var(--line); }
+    .faq-grid { display: grid; grid-template-columns: .34fr .66fr; gap: 100px; }
+    .faq h2 { margin: 22px 0 0; font-size: clamp(40px, 5vw, 62px); line-height: .98; letter-spacing: -.07em; }
     .faq-list { border-top: 1px solid var(--line); }
     .faq-item { border-bottom: 1px solid var(--line); }
-    .faq-question { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; padding: 24px 0; border: 0; background: transparent; cursor: pointer; text-align: left; font-size: 17px; }
-    .faq-icon { position: relative; width: 20px; height: 20px; flex: 0 0 20px; color: var(--brass); }
-    .faq-icon::before, .faq-icon::after { content: ''; position: absolute; top: 9px; left: 2px; width: 16px; height: 1px; background: currentColor; transition: transform 200ms ease; }
+    .faq-question { display: flex; align-items: center; justify-content: space-between; gap: 20px; width: 100%; padding: 21px 0; border: 0; background: transparent; cursor: pointer; text-align: left; font-size: 16px; }
+    .faq-icon { position: relative; flex: 0 0 18px; width: 18px; height: 18px; color: var(--signal); }
+    .faq-icon::before, .faq-icon::after { position: absolute; top: 8px; left: 1px; width: 16px; height: 1px; background: currentColor; content: ''; transition: transform 180ms ease; }
     .faq-icon::after { transform: rotate(90deg); }
     .faq-question[aria-expanded="true"] .faq-icon::after { transform: rotate(0); }
-    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 300ms ease; }
-    .faq-answer p { max-width: 530px; margin: -4px 0 24px; color: var(--paper-dim); font-size: 14px; line-height: 1.55; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height 280ms ease; }
+    .faq-answer p { max-width: 500px; margin: -2px 0 22px; color: var(--slate-light); font-size: 14px; line-height: 1.55; }
 
-    .contact { position: relative; padding: 150px 0 125px; overflow: hidden; background: var(--brass); color: var(--ink); }
-    .contact::before { content: ''; position: absolute; width: 680px; height: 680px; right: -270px; top: -260px; border: 1px solid rgba(8,9,12,.19); border-radius: 50%; box-shadow: 0 0 0 80px rgba(8,9,12,.035), 0 0 0 160px rgba(8,9,12,.025); }
-    .contact-inner { position: relative; z-index: 1; }
-    .contact .eyebrow { color: rgba(8,9,12,.64); }
-    .contact .eyebrow::before { background: var(--ink); }
-    .contact h2 { max-width: 880px; margin: 24px 0 38px; font-size: 80px; line-height: .93; letter-spacing: -.08em; }
-    .contact h2 em { font-family: var(--serif); font-weight: 400; }
-    .contact-foot { display: flex; align-items: center; justify-content: space-between; gap: 30px; padding-top: 26px; border-top: 1px solid rgba(8,9,12,.25); }
-    .contact-foot p { max-width: 360px; margin: 0; color: rgba(8,9,12,.64); font-size: 14px; line-height: 1.5; }
-    .contact .button { border-color: var(--ink); color: var(--ink); }
-    .contact .button:hover, .contact .button:focus-visible { background: var(--ink); color: var(--paper); }
+    .contact { padding: 125px 0 120px; }
+    .contact-inner { display: grid; grid-template-columns: .34fr .66fr; gap: 100px; }
+    .contact-copy h2 { max-width: 700px; margin: 22px 0 30px; font-size: clamp(46px, 6.2vw, 82px); line-height: .92; letter-spacing: -.08em; }
+    .contact-copy p { max-width: 420px; margin: 0; color: var(--slate-light); font-size: 16px; line-height: 1.6; }
+    .contact-action { align-self: end; padding-bottom: 7px; }
+    .contact-action p { max-width: 270px; margin: 0 0 24px; color: var(--slate-light); font-size: 14px; line-height: 1.55; }
+    .site-footer { padding: 24px 0 30px; border-top: 1px solid var(--line); }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .footer-copy, .footer-links { color: var(--slate); font: 10px/1.4 var(--mono); letter-spacing: .06em; text-transform: uppercase; }
+    .footer-links { display: flex; gap: 22px; }
+    .footer-links a:hover, .footer-links a:focus-visible { color: var(--paper); }
 
-    .site-footer { padding: 26px 0 32px; background: var(--ink); }
-    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 30px; }
-    .footer-copy, .footer-links { color: var(--paper-faint); font: 10px/1.5 var(--mono); letter-spacing: .08em; text-transform: uppercase; }
-    .footer-links { display: flex; gap: 24px; }
-    .footer-links a:hover { color: var(--paper); }
-
-    [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 700ms ease, transform 700ms ease; }
+    [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity 520ms ease, transform 520ms ease; }
     [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
-    .delay-1 { transition-delay: 100ms; }
-    .delay-2 { transition-delay: 180ms; }
-    .delay-3 { transition-delay: 260ms; }
+    .delay-1 { transition-delay: 90ms; }
+    .delay-2 { transition-delay: 160ms; }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
       [data-reveal] { opacity: 1; transform: none; }
     }
 
-    @media (max-width: 960px) {
-      .shell { width: min(100% - 44px, 720px); }
-      .hero { min-height: auto; padding: 155px 0 80px; }
-      .hero-grid, .statement-grid, .dark-band-grid, .pricing-grid, .faq-grid { grid-template-columns: 1fr; gap: 60px; }
-      .hero h1 { font-size: 64px; }
-      .pulse { max-width: 620px; }
-      .statement h2, .section-head h2, .process h2, .contact h2 { font-size: 56px; }
-      .dark-band h2, .pricing h2, .faq h2 { font-size: 50px; }
-      .section-head { display: block; }
-      .section-head p { margin-top: 24px; }
-      .service-item { grid-template-columns: 70px 1fr; }
-      .service-copy { grid-column: 2; margin-left: 0; }
-      .process-grid { grid-template-columns: 1fr; }
-      .process-step, .process-step + .process-step { min-height: auto; padding: 25px 0 34px; border-left: 0; }
-      .process-step h3 { margin-top: 30px; }
+    @media (max-width: 900px) {
+      .shell { width: min(720px, calc(100% - 44px)); }
+      .hero { min-height: auto; padding: 150px 0 82px; }
+      .hero-grid, .section-heading, .split, .pricing-grid, .faq-grid, .contact-inner { grid-template-columns: 1fr; gap: 54px; }
+      .hero-side { max-width: 560px; }
+      .section, .pricing, .faq { padding: 88px 0; }
+      .section-heading { margin-bottom: 50px; }
+      .contact { padding: 96px 0 90px; }
+      .contact-action { padding: 0; }
+      .contact-action p { margin-bottom: 22px; }
     }
     @media (max-width: 640px) {
       .shell { width: calc(100% - 36px); }
       .site-header { padding: 20px 0; }
-      .main-nav { display: none; position: absolute; top: 66px; left: 18px; right: 18px; padding: 16px; background: var(--ink-lift); border: 1px solid var(--line); flex-direction: column; align-items: stretch; gap: 0; }
+      .main-nav { display: none; position: absolute; top: 65px; right: 18px; left: 18px; flex-direction: column; align-items: stretch; gap: 0; padding: 9px 16px; border: 1px solid var(--line); background: var(--surface); }
       .main-nav.is-open { display: flex; }
-      .main-nav a { padding: 15px 8px; border-bottom: 1px solid var(--line); }
+      .main-nav a { padding: 15px 0; border-bottom: 1px solid var(--line); }
       .main-nav a:last-child { border-bottom: 0; }
-      .header-cta { display: none; }
+      .header-link { display: none; }
       .menu-toggle { display: block; }
-      .menu-toggle span, .menu-toggle::before, .menu-toggle::after { display: block; width: 21px; height: 1px; margin: 5px 0; background: var(--paper); content: ''; transition: transform 200ms ease; }
-      .hero { padding-top: 130px; }
-      .hero h1 { font-size: 48px; letter-spacing: -.07em; }
+      .hero { padding-top: 125px; padding-bottom: 70px; }
+      .hero h1 { font-size: 49px; }
       .hero-lede { font-size: 16px; }
-      .pulse { min-height: 440px; padding: 18px; }
-      .pulse-orbit { width: 140px; height: 140px; }
-      .pulse-orbit::after { inset: 50px; }
-      .statement, .services, .dark-band, .process, .pricing, .faq { padding: 86px 0; }
-      .statement h2, .section-head h2, .process h2, .contact h2 { font-size: 43px; }
-      .dark-band h2, .pricing h2, .faq h2 { font-size: 40px; }
-      .statement-bottom, .contact-foot, .footer-inner { display: block; }
-      .statement-annotation { margin-top: 30px; }
-      .service-item { grid-template-columns: 44px 1fr; gap: 18px; padding: 22px 0; }
-      .service-title { font-size: 21px; }
-      .service-copy { grid-column: 2; font-size: 12px; }
-      .contact { padding: 90px 0 85px; }
-      .contact h2 { font-size: 52px; }
-      .contact-foot .button { margin-top: 28px; }
-      .footer-links { margin-top: 20px; }
+      .hero-actions { display: grid; }
+      .button { width: 100%; }
+      .hero::after { right: 8%; }
+      .section, .pricing, .faq { padding: 76px 0; }
+      .section-heading, .split, .pricing-grid, .faq-grid, .contact-inner { gap: 38px; }
+      .section-heading h2, .split-heading h2, .pricing h2, .faq h2 { font-size: 42px; }
+      .section-heading p { margin-top: 18px; font-size: 15px; }
+      .outcome { grid-template-columns: 35px 1fr; gap: 15px; padding: 21px 0; }
+      .outcome:hover { padding-right: 0; padding-left: 0; background: none; }
+      .outcome p { grid-column: 2; font-size: 13px; }
+      .price-line { display: block; }
+      .price-line span { display: block; margin-top: 8px; text-align: left; }
+      .contact { padding: 82px 0 78px; }
+      .contact-copy h2 { font-size: 53px; }
+      .footer-inner { display: block; }
+      .footer-copy { display: block; margin: 18px 0; }
+      .footer-links { gap: 18px; }
     }
   </style>
 </head>
@@ -333,16 +259,9 @@
   <div class="progress" aria-hidden="true"></div>
   <header class="site-header">
     <div class="shell header-inner">
-      <a class="brand" href="#top" aria-label="Polaris home">
-        <img src="assets/polaris-mark.svg" alt="" />
-        <span class="brand-name">POLARIS</span>
-      </a>
-      <nav class="main-nav" aria-label="Main navigation">
-        <a href="#services">What changes</a>
-        <a href="#process">How it works</a>
-        <a href="#faq">Questions</a>
-      </nav>
-      <a class="header-cta" href="https://www.instagram.com/polaris.co.in/" target="_blank" rel="noreferrer">Start a conversation <span class="arrow">↗</span></a>
+      <a class="brand" href="#top" aria-label="Polaris home"><img src="assets/polaris-mark.svg" alt="" /><span class="brand-name">POLARIS</span></a>
+      <nav class="main-nav" aria-label="Main navigation"><a href="#outcomes">What changes</a><a href="#approach">How it works</a><a href="#faq">Questions</a></nav>
+      <a class="header-link" href="https://www.instagram.com/polaris.co.in/" target="_blank" rel="noreferrer">Start a conversation <span class="arrow">↗</span></a>
       <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false"><span></span></button>
     </div>
   </header>
@@ -352,171 +271,37 @@
       <div class="shell hero-grid">
         <div class="hero-copy" data-reveal>
           <div class="eyebrow">Business systems / Delhi to anywhere</div>
-          <h1>Make more room for the work that <em>matters.</em></h1>
-          <p class="hero-lede">Polaris makes the busy parts of your business easier to find, easier to answer, and easier to move forward — so good work does not get lost between the cracks.</p>
-          <div class="hero-actions">
-            <a class="button button--solid" href="https://www.instagram.com/polaris.co.in/" target="_blank" rel="noreferrer">Tell us what is stuck <span class="arrow">↗</span></a>
-            <a class="button" href="#services">See what changes <span class="arrow">↓</span></a>
-          </div>
-          <p class="hero-note">For owners who are done carrying every repeat question themselves.</p>
+          <h1>Make the business <span class="underline">easier to run.</span></h1>
+          <p class="hero-lede">Polaris helps local businesses get found, answer customers, and keep good opportunities moving — without adding more work to your day.</p>
+          <div class="hero-actions"><a class="button button--solid" href="https://www.instagram.com/polaris.co.in/" target="_blank" rel="noreferrer">Tell us what is stuck <span class="arrow">↗</span></a><a class="button" href="#outcomes">See what changes <span class="arrow">↓</span></a></div>
+          <p class="hero-note">Clearer customer journeys. Less repeat work.</p>
         </div>
-
-        <div class="pulse" data-reveal data-reveal-delay="1" aria-label="A live view of the business work Polaris helps move forward">
-          <div class="pulse-head"><span class="pulse-title">The business pulse</span><span class="pulse-time">Now / moving</span></div>
-          <div class="pulse-center">
-            <div class="pulse-orbit">
-              <span class="orbit-dot"></span>
-              <span class="pulse-label pulse-label--top">Find</span>
-              <span class="pulse-label pulse-label--right">Answer</span>
-              <span class="pulse-label pulse-label--bottom">Handoff</span>
-              <span class="pulse-mark"><img src="assets/polaris-mark.svg" alt="" /></span>
-            </div>
-          </div>
-          <div class="pulse-rows" aria-live="polite">
-            <div class="pulse-row is-active"><span>New enquiry</span><small>made easy</small></div>
-            <div class="pulse-row"><span>Repeat question</span><small>handled</small></div>
-            <div class="pulse-row"><span>Follow-up</span><small>kept moving</small></div>
-          </div>
+        <div class="hero-side" data-reveal data-reveal-delay="1">
+          <p class="side-intro">The right system should feel like a calm extension of your business.</p>
+          <div class="side-list"><div class="side-item"><span>01</span><p>People find you and understand the value quickly.</p></div><div class="side-item"><span>02</span><p>Questions get answered while the interest is still there.</p></div><div class="side-item"><span>03</span><p>Follow-up keeps moving without living in your head.</p></div></div>
         </div>
       </div>
     </section>
 
-    <section class="statement" id="about">
+    <section class="section" id="outcomes">
       <div class="shell">
-        <div class="statement-grid">
-          <div class="eyebrow" data-reveal>01 / The shift</div>
-          <div data-reveal class="delay-1">
-            <h2>You do not need another <em>tool.</em> You need a business that answers back.</h2>
-            <div class="statement-bottom">
-              <p>We look at the moments that cost you time — the missed enquiry, the unanswered question, the lead that goes quiet — and build a calmer way through them.</p>
-              <span class="statement-annotation">Less chasing<br />more moving</span>
-            </div>
-          </div>
-        </div>
+        <div class="section-heading" data-reveal><div class="eyebrow">01 / What changes</div><div><h2>More people take the next step. You get time back.</h2><p>We improve the moments between being noticed and being chosen — using clear words, useful screens, and simple follow-through.</p></div></div>
+        <div class="outcome-list"><div class="outcome" data-reveal><span class="outcome-no">01</span><h3>Be easier to choose.</h3><p>Your offer is clear before someone has to ask for the basics.</p></div><div class="outcome" data-reveal data-reveal-delay="1"><span class="outcome-no">02</span><h3>Stay close to customers.</h3><p>Useful answers and clear next steps are available when people are ready.</p></div><div class="outcome" data-reveal data-reveal-delay="2"><span class="outcome-no">03</span><h3>Stop losing good interest.</h3><p>Enquiries, reminders, and follow-ups keep moving instead of going quiet.</p></div><div class="outcome" data-reveal><span class="outcome-no">04</span><h3>Make room for the work.</h3><p>Repeat jobs become a reliable part of the system, not another thing to remember.</p></div></div>
       </div>
     </section>
 
-    <section class="services" id="services">
-      <div class="shell">
-        <div class="section-head" data-reveal>
-          <div>
-            <div class="eyebrow">02 / What changes</div>
-            <h2>One considered layer around the work you already do.</h2>
-          </div>
-          <p>Not a menu of disconnected products. A practical system shaped around your customers and your day.</p>
-        </div>
-        <div class="service-list">
-          <div class="service-item" data-reveal>
-            <span class="service-index">01</span>
-            <div class="service-title">Be found by the right <em>people.</em></div>
-            <p class="service-copy">A website that gives your business a point of view, explains the value, and makes the next step feel obvious.</p>
-          </div>
-          <div class="service-item" data-reveal>
-            <span class="service-index">02</span>
-            <div class="service-title">Give every question a useful <em>answer.</em></div>
-            <p class="service-copy">Helpful conversations across your site and WhatsApp, with the right handoff when a person needs you.</p>
-          </div>
-          <div class="service-item" data-reveal>
-            <span class="service-index">03</span>
-            <div class="service-title">Turn attention into <em>action.</em></div>
-            <p class="service-copy">A clearer path from first interest to booking, enquiry, purchase, or the conversation that matters.</p>
-          </div>
-          <div class="service-item" data-reveal>
-            <span class="service-index">04</span>
-            <div class="service-title">Keep the good work <em>moving.</em></div>
-            <p class="service-copy">Follow-ups, reminders, and small repeatable jobs that keep the business close to its customers.</p>
-          </div>
-        </div>
-      </div>
+    <section class="section" id="approach">
+      <div class="shell split"><div class="split-heading" data-reveal><div class="eyebrow">02 / How it works</div><h2>Start with what is slowing you down.</h2><p>We keep the first move focused. Then we build from what your customers and your team actually need.</p></div><div class="steps" data-reveal data-reveal-delay="1"><div class="step"><span class="step-number">01</span><div><h3>Find the friction.</h3><p>We look at what gets asked, missed, copied, chased, or explained again.</p></div></div><div class="step"><span class="step-number">02</span><div><h3>Shape the path.</h3><p>We turn that friction into a clear customer journey that feels like your business.</p></div></div><div class="step"><span class="step-number">03</span><div><h3>Launch and improve.</h3><p>We put it to work, learn from real behaviour, and make the useful parts stronger.</p></div></div></div></div>
     </section>
 
-    <section class="dark-band">
-      <div class="shell dark-band-grid">
-        <div data-reveal>
-          <div class="eyebrow">03 / The outcome</div>
-          <h2>A sharper front door. A quieter <em>back office.</em></h2>
-        </div>
-        <div class="change-list" data-reveal data-reveal-delay="1">
-          <div class="change-item"><span class="change-no">A</span><div><h3>People know what you do.</h3><p>Your offer is clear before someone has to ask for the basics.</p></div></div>
-          <div class="change-item"><span class="change-no">B</span><div><h3>Interest does not disappear.</h3><p>Useful next steps stay available after the first click, call, or message.</p></div></div>
-          <div class="change-item"><span class="change-no">C</span><div><h3>You get time back.</h3><p>The business keeps its warmth while the repeat work stops sitting on your shoulders.</p></div></div>
-        </div>
-      </div>
-    </section>
+    <section class="pricing" id="pricing"><div class="shell pricing-grid"><div data-reveal><div class="eyebrow">03 / A sensible start</div><h2>Build what earns its place.</h2></div><div data-reveal data-reveal-delay="1"><p class="pricing-intro">There is no oversized package to buy. We start with the business problem that matters now and scope the smallest useful system around it.</p><div class="price-lines"><div class="price-line"><strong>One focused improvement</strong><span>For one clear bottleneck, built and launched with care.</span></div><div class="price-line"><strong>A connected customer journey</strong><span>For businesses ready to improve the path from interest to action.</span></div><div class="price-line"><strong>Ongoing support</strong><span>For teams that want a steady partner as the business changes.</span></div></div></div></div></section>
 
-    <section class="process" id="process">
-      <div class="shell">
-        <div class="eyebrow" data-reveal>04 / How it works</div>
-        <h2 data-reveal data-reveal-delay="1">Start with the work that gets <em>repeated.</em></h2>
-        <div class="process-grid">
-          <div class="process-step" data-reveal><div class="step-no">01 / LISTEN</div><h3>We find the friction.</h3><p>What is being asked, missed, copied, chased, or explained again?</p></div>
-          <div class="process-step" data-reveal data-reveal-delay="1"><div class="step-no">02 / SHAPE</div><h3>We shape the path.</h3><p>Words, screens, conversations, and handoffs that feel like your business.</p></div>
-          <div class="process-step" data-reveal data-reveal-delay="2"><div class="step-no">03 / MOVE</div><h3>We keep it useful.</h3><p>Launch first. Learn what people do. Make the system better from there.</p></div>
-        </div>
-      </div>
-    </section>
+    <section class="faq" id="faq"><div class="shell faq-grid"><div data-reveal><div class="eyebrow">04 / Questions</div><h2>Keep it simple.</h2></div><div class="faq-list" data-reveal data-reveal-delay="1"><div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>What kind of business is this for?</span><span class="faq-icon" aria-hidden="true"></span></button><div class="faq-answer"><p>Any business where customers need to find you, trust you, ask questions, or take the next step. We start from the way your business actually works.</p></div></div><div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>Do I need to know exactly what I want?</span><span class="faq-icon" aria-hidden="true"></span></button><div class="faq-answer"><p>No. Bring the part that is taking too much of your time. We will help turn it into a clear first move.</p></div></div><div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>Will it still feel like my business?</span><span class="faq-icon" aria-hidden="true"></span></button><div class="faq-answer"><p>That is the point. The system should carry your voice, your standards, and the way you want customers to feel when they reach you.</p></div></div><div class="faq-item"><button class="faq-question" type="button" aria-expanded="false"><span>How do we begin?</span><span class="faq-icon" aria-hidden="true"></span></button><div class="faq-answer"><p>Send us the thing that keeps slipping through the cracks. We will reply with a focused first move.</p></div></div></div></div></section>
 
-    <section class="pricing" id="pricing">
-      <div class="shell pricing-grid">
-        <div data-reveal>
-          <div class="eyebrow">05 / A sensible start</div>
-          <h2>Pricing follows the <em>work,</em> not a package.</h2>
-        </div>
-        <div data-reveal data-reveal-delay="1">
-          <p class="pricing-copy">We start with the part of the business that needs movement. Then we build only what earns its place.</p>
-          <div class="price-line"><strong>One focused system</strong><span>For one clear bottleneck, built and launched with care.</span></div>
-          <div class="price-line"><strong>A wider operating layer</strong><span>For businesses ready to connect their customer journey end to end.</span></div>
-          <div class="price-line"><strong>Ongoing support</strong><span>For teams that want someone in the room as the business changes.</span></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="faq" id="faq">
-      <div class="shell faq-grid">
-        <div data-reveal>
-          <div class="eyebrow">06 / Questions</div>
-          <h2>Keep it simple.</h2>
-        </div>
-        <div class="faq-list" data-reveal data-reveal-delay="1">
-          <div class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false"><span>What kind of business is this for?</span><span class="faq-icon" aria-hidden="true"></span></button>
-            <div class="faq-answer"><p>Any business where customers need to find you, trust you, ask questions, or take the next step. We start from the way your business actually works.</p></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false"><span>Do I need to know exactly what I want?</span><span class="faq-icon" aria-hidden="true"></span></button>
-            <div class="faq-answer"><p>No. Bring the friction. We will help turn it into a clear, useful first build.</p></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false"><span>Will it still feel like my business?</span><span class="faq-icon" aria-hidden="true"></span></button>
-            <div class="faq-answer"><p>That is the point. The system should carry your voice, your standards, and the way you want customers to feel when they reach you.</p></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-question" type="button" aria-expanded="false"><span>How do we begin?</span><span class="faq-icon" aria-hidden="true"></span></button>
-            <div class="faq-answer"><p>Send us the part that is taking too much of your time. We will reply with a focused first move.</p></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="contact" id="contact">
-      <div class="shell contact-inner" data-reveal>
-        <div class="eyebrow">07 / Your next move</div>
-        <h2>Tell us what keeps slipping through the <em>cracks.</em></h2>
-        <div class="contact-foot">
-          <p>We will help you find the smallest useful system to build first.</p>
-          <a class="button" href="https://www.instagram.com/polaris.co.in/" target="_blank" rel="noreferrer">Start a project <span class="arrow">↗</span></a>
-        </div>
-      </div>
-    </section>
+    <section class="contact" id="contact"><div class="shell contact-inner"><div class="contact-copy" data-reveal><div class="eyebrow">05 / Your next move</div><h2>Make the next step <span class="signal">clear.</span></h2><p>Tell us where the business is losing time, attention, or good opportunities. We will help you find what to fix first.</p></div><div class="contact-action" data-reveal data-reveal-delay="1"><p>A short conversation is enough to start.</p><a class="button button--solid" href="https://www.instagram.com/polaris.co.in/" target="_blank" rel="noreferrer">Start a conversation <span class="arrow">↗</span></a></div></div></section>
   </main>
 
-  <footer class="site-footer">
-    <div class="shell footer-inner">
-      <div class="brand"><img src="assets/polaris-mark.svg" alt="" /><span class="brand-name">POLARIS</span></div>
-      <span class="footer-copy">Business systems for the work ahead</span>
-      <div class="footer-links"><a href="https://www.instagram.com/polaris.co.in/" target="_blank" rel="noreferrer">Instagram ↗</a><a href="#top">Back to top ↑</a></div>
-    </div>
-  </footer>
+  <footer class="site-footer"><div class="shell footer-inner"><div class="brand"><img src="assets/polaris-mark.svg" alt="" /><span class="brand-name">POLARIS</span></div><span class="footer-copy">Business systems for the work ahead</span><div class="footer-links"><a href="https://www.instagram.com/polaris.co.in/" target="_blank" rel="noreferrer">Instagram ↗</a><a href="#top">Back to top ↑</a></div></div></footer>
 
   <script>
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -534,25 +319,14 @@
     } else {
       const revealObserver = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const delay = entry.target.dataset.revealDelay;
-            if (delay) entry.target.classList.add(`delay-${delay}`);
-            entry.target.classList.add('is-visible');
-            revealObserver.unobserve(entry.target);
-          }
+          if (!entry.isIntersecting) return;
+          const delay = entry.target.dataset.revealDelay;
+          if (delay) entry.target.classList.add(`delay-${delay}`);
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
         });
       }, { threshold: .12 });
       revealItems.forEach(item => revealObserver.observe(item));
-    }
-
-    const rows = [...document.querySelectorAll('.pulse-row')];
-    if (!reducedMotion) {
-      let activeRow = 0;
-      window.setInterval(() => {
-        rows[activeRow].classList.remove('is-active');
-        activeRow = (activeRow + 1) % rows.length;
-        rows[activeRow].classList.add('is-active');
-      }, 2400);
     }
 
     document.querySelectorAll('.faq-question').forEach(question => {
@@ -582,14 +356,6 @@
       menuToggle.setAttribute('aria-expanded', 'false');
       nav.classList.remove('is-open');
     }));
-
-    if (!reducedMotion) {
-      document.querySelector('.hero').addEventListener('pointermove', event => {
-        const rect = event.currentTarget.getBoundingClientRect();
-        document.documentElement.style.setProperty('--mx', `${((event.clientX - rect.left) / rect.width) * 100}%`);
-        document.documentElement.style.setProperty('--my', `${((event.clientY - rect.top) / rect.height) * 100}%`);
-      });
-    }
   </script>
 </body>
 </html>
